@@ -9,9 +9,14 @@ const forside = createPage("forside/forside.html", {
     title: "Portfolio | Velkommen"
 });
 
+const contactPage = createPage("contact/contact.html");
 
 app.get("/", (req, res) => {
     res.send(forside);
+});
+
+app.get("/contact", (req, res) => {
+    res.send(contactPage);
 });
 
 const PORT = process.env.PORT || 3000;
