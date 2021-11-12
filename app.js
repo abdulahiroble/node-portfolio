@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const ejs = require("ejs");
+const path = require("path");
+const fs = require("fs");
 
 app.use(express.static("public"));
 
@@ -20,6 +23,7 @@ const forside = createPage("forside/forside.html", {
 
 const contactPage = createPage("contact/contact.html");
 const projectsPage = createPage("projects/projects.html");
+const cvPage = createPage("cv/cv.html");
 
 app.get("/", (req, res) => {
     res.send(forside);
@@ -32,6 +36,10 @@ app.get("/projects", (req, res) => {
 
 app.get("/contact", (req, res) => {
     res.send(contactPage);
+});
+
+app.get("/cv", (req, res) => {
+    res.send(cvPage);
 });
 
 const PORT = process.env.PORT || 3000;
