@@ -1,6 +1,6 @@
 <main class="flex-grow">
   <div class="my-5 text-center text-2xl font-bold">Contact me</div>
-  <form class="w-full max-w-lg mx-auto">
+  <form action="/api/contact" method="POST" class="w-full max-w-lg mx-auto">
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <label
@@ -17,6 +17,8 @@
           First Name
         </label>
         <input
+          id="name"
+          name="name"
           class="
             appearance-none
             block
@@ -47,9 +49,11 @@
           "
           for="grid-last-name"
         >
-          Last Name
+          Email
         </label>
         <input
+          id="email"
+          name="email"
           class="
             appearance-none
             block
@@ -64,8 +68,8 @@
             focus:outline-none focus:bg-white focus:border-gray-500
           "
           id="grid-last-name"
-          type="text"
-          placeholder="Doe"
+          type="email"
+          placeholder="example@gmail.com"
         />
       </div>
     </div>
@@ -85,6 +89,8 @@
           Message
         </label>
         <textarea
+          id="message"
+          name="message"
           class="
             appearance-none
             block
@@ -100,11 +106,25 @@
             focus:outline-none focus:bg-white focus:border-gray-500
           "
           id="grid-password"
-          type="password"
           placeholder="Skriv en besked"
         ></textarea>
       </div>
     </div>
+    <button
+      id="contact-button"
+      class="
+        text-center text-indigo-400
+        font-bold
+        rounded
+        py-2
+        w-2/12
+        focus:outline-none
+        bg-gray-900
+        border-2 border-indigo-400
+      "
+    >
+      Send
+    </button>
   </form>
 </main>
 
