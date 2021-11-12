@@ -3,9 +3,14 @@ const app = express();
 
 app.use(express.static("public"));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const projectsRouter = require("./routers/projects.js");
+const contactRouter = require("./routers/contact.js");
 
 app.use(projectsRouter.router);
+app.use(contactRouter.router);
 
 const { createPage } = require("./render.js");
 
