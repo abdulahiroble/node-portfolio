@@ -1,39 +1,44 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const ejs = require("ejs");
-const path = require("path");
-const fs = require("fs");
+// import contactRouter from "./routers/contactRouter.js"
+
+// const ejs = require("ejs");
+// const path = require("path");
+// const fs = require("fs");
+
+// const projectsRouter = require("./routers/projects.js");
+// const contactRouter = require("./routers/contact.js");
 
 app.use(express.static("public"));
-const dirPath = path.join(__dirname, "public/pdfs");
-
-const files = fs.readdirSync(dirPath).map(name => {
-    return {
-        name: path.basename(name, ".pdf"),
-        url: `/pdfs/${name}`
-    };
-});
-
-app.set("view engine", "ejs");
-app.use(express.static("public"));
-
-app.use(
-    express.static("public", {
-        setHeaders: (res, filepath) =>
-            res.attachment(`pdf-express-${path.basename(filepath)}`)
-    })
-);
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const projectsRouter = require("./routers/projects.js");
-const contactRouter = require("./routers/contact.js");
+// const dirPath = path.join(__dirname, "public/pdfs");
 
-app.use(projectsRouter.router);
-app.use(contactRouter.router);
+// const files = fs.readdirSync(dirPath).map(name => {
+//     return {
+//         name: path.basename(name, ".pdf"),
+//         url: `/pdfs/${name}`
+//     };
+// });
 
-const { createPage } = require("./render.js");
+// app.set("view engine", "ejs");
+// app.use(express.static("public"));
+
+// app.use(
+//     express.static("public", {
+//         setHeaders: (res, filepath) =>
+//             res.attachment(`pdf-express-${path.basename(filepath)}`)
+//     })
+// );
+
+import projectsRouter from "./routers/projects.js"
+
+app.use(projectsRouter);
+// app.use(contactRouter.router);
+
+// const { createPage } = require("./render.js");
+import { createPage } from "./render.js"
 
 const forside = createPage("forside/forside.html", {
     title: "Portfolio | Velkommen"
@@ -65,10 +70,10 @@ app.get("/", (req, res) => {
     res.render("index", { files });
 });
 
-app.get("/:file", (req, res) => {
-    const file = files.find(f => f.name === req.params.file);
-    res.render("index", { files, file });
-});
+// app.get("/:file", (req, res) => {
+//     const file = files.find(f => f.name === req.params.file);
+//     res.render("index", { files, file });
+// });
 
 const PORT = process.env.PORT || 3000;
 
