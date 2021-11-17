@@ -3,10 +3,10 @@ import { createConnection } from "./connectSqlite.js";
 (async () => {
     const connection = await createConnection();
 
-    await connection.exec("DROP TABLE IF EXISTS games");
+    await connection.exec("DROP TABLE IF EXISTS projects");
 
     const gamesTableSchema = `
-        CREATE TABLE games (
+        CREATE TABLE projects (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
             genre TEXT,
