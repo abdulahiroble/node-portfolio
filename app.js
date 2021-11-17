@@ -1,6 +1,8 @@
 import express from "express";
+import projectsRouter from "./routers/projects.js"
+import { createPage } from "./render.js"
 const app = express();
-// import contactRouter from "./routers/contactRouter.js"
+import contact from "./routers/contact.js"
 
 // const ejs = require("ejs");
 // const path = require("path");
@@ -12,6 +14,8 @@ const app = express();
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(projectsRouter);
+app.use(contact);
 
 // const dirPath = path.join(__dirname, "public/pdfs");
 
@@ -32,13 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 //     })
 // );
 
-import projectsRouter from "./routers/projects.js"
 
-app.use(projectsRouter);
-// app.use(contactRouter.router);
-
-// const { createPage } = require("./render.js");
-import { createPage } from "./render.js"
 
 const forside = createPage("forside/forside.html", {
     title: "Portfolio | Velkommen"

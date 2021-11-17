@@ -1,6 +1,12 @@
-const router = require("express").Router();
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+import express from "express";
+const router = express.Router();
+import nodemailer from "nodemailer"
+import dotenv from "dotenv"
+dotenv.config()
+
+// const router = require("express").Router();
+// const nodemailer = require("nodemailer");
+// require("dotenv").config();
 
 router.post("/api/contact", (req, res) => {
     console.log(req.body);
@@ -48,7 +54,4 @@ router.post("/api/contact", (req, res) => {
     res.send();
 });
 
-module.exports = {
-    router
-};
-
+export default router;
