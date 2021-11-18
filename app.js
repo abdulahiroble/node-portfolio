@@ -45,6 +45,7 @@ const forside = createPage("forside/forside.html", {
 const contactPage = createPage("contact/contact.html");
 const projectsPage = createPage("projects/projects.html");
 const cvPage = createPage("cv/cv.html");
+const loginPage = createPage("login/login.html")
 // const pdf = createPage("views/index.ejs");
 
 app.get("/", (req, res) => {
@@ -53,6 +54,10 @@ app.get("/", (req, res) => {
 
 app.get("/projects", (req, res) => {
     res.send(projectsPage);
+});
+
+app.get("/login", (req, res) => {
+    res.send(loginPage);
 });
 
 
