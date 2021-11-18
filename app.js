@@ -2,9 +2,10 @@ import express from "express";
 import projectsRouter from "./routers/projects.js"
 import { createPage } from "./render.js"
 import contact from "./routers/contact.js"
-import mysql from "mysql"
 import session from "express-session";
 const app = express();
+import sessionRouter from "./routers/session.js";
+import mysql from "mysql"
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -13,17 +14,19 @@ var connection = mysql.createConnection({
     database: 'node-portfolio'
 });
 
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(projectsRouter);
 app.use(contact);
-
-app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
-}));
+app.use(sessionRouter);
 
 const forside = createPage("forside/forside.html", {
     title: "Portfolio | Velkommen"
@@ -60,9 +63,9 @@ app.get("/admin", (req, res) => {
     res.send(adminPage);
 });
 
-// app.get("/", (req, res) => {
-//     res.render("index", { files });
-// });
+app.get("/", (req, res) => {
+    res.render("index", { files });
+});
 
 app.post('/auth', function (request, response) {
     var username = request.body.username;
@@ -84,14 +87,23 @@ app.post('/auth', function (request, response) {
     }
 });
 
-app.get('/admin', function (request, response) {
-    if (request.session.loggedin) {
-        response.send('Welcome back, ' + request.session.username + '!');
-    } else {
-        response.send('Please login to view this page!');
-    }
-    response.end();
-});
+// app.get('/admin', function (request, response) {
+//     if (request.session.loggedin) {
+//         response.send('Welcome back, ' + request.session.username + '!');
+//     } else {
+//         response.send('Please login to view this page!');
+//     }
+//     response.end();
+// });
+
+// app.get("/isVisiting", (req, res) => {
+//     res.send({ clientIsVisiting: req.session.isVisiting || false });
+// });
+
+// app.get("/leave", (req, response) => {
+//     req.session.destroy();
+//     response.send({});
+// });
 
 const PORT = process.env.PORT || 3000;
 
