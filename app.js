@@ -36,7 +36,7 @@ const contactPage = createPage("contact/contact.html");
 const projectsPage = createPage("projects/projects.html");
 const cvPage = createPage("cv/cv.html");
 const loginPage = createPage("login/login.html")
-const adminPage = createPage("admin/dashboard.html")
+export const adminPage = createPage("admin/dashboard.html")
 
 app.get("/", (req, res) => {
     res.send(forside);

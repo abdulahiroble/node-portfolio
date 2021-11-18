@@ -1,4 +1,5 @@
 import express from "express";
+import { adminPage } from "../app.js";
 const router = express.Router();
 // import mysql from "mysql"
 
@@ -46,7 +47,7 @@ const router = express.Router();
 router.get("/admin", (req, res) => {
     // req.session.isVisiting = true;
     if (req.session.loggedin) {
-        res.send('Welcome back, ' + req.session.username + '!');
+        res.send(adminPage);
     } else {
         res.send('Please login to view this page!');
     }
