@@ -15,4 +15,4 @@ import { createConnection } from "./connectSqlite.js";
     `;
 
     await connection.exec(gamesTableSchema);
-})() 
+})()
