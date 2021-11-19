@@ -28,7 +28,7 @@ app.use(projectsRouter);
 app.use(contact);
 app.use(sessionRouter);
 
-const forside = createPage("forside/forside.html", {
+export const forside = createPage("forside/forside.html", {
     title: "Portfolio | Velkommen"
 });
 

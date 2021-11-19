@@ -1,5 +1,5 @@
 import express from "express";
-import { adminPage } from "../app.js";
+import { adminPage, forside } from "../app.js";
 const router = express.Router();
 // import mysql from "mysql"
 
@@ -58,9 +58,9 @@ router.get("/isVisiting", (req, res) => {
     res.send({ clientIsVisiting: req.session.isVisiting || false });
 });
 
-router.get("/leave", (req, res) => {
+router.get("/logout", (req, res) => {
     req.session.destroy();
-    res.send({});
+    res.send(forside);
 });
 
 
