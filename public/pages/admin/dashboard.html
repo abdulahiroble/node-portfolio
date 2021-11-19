@@ -1,3 +1,24 @@
 <main class="flex-grow">
   <div class="my-5 text-center text-2xl font-bold">Welcome Admin!</div>
+
+  <form action="/createProject" method="post">
+    <input name="name" class="" type="text" placeholder="Weather app" />
+    <input name="category" class="" type="text" placeholder="entertainment" />
+    <input name="tech" class="" type="text" placeholder="js" />
+    <button
+      id="contact-button"
+      class="
+        text-center text-indigo-400
+        font-bold
+        rounded
+        py-2
+        w-2/12
+        focus:outline-none
+        bg-gray-900
+        border-2 border-indigo-400
+      "
+    >
+      Send
+    </button>
+  </form>
 </main>

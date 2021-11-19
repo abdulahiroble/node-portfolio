@@ -67,6 +67,18 @@ app.get("/", (req, res) => {
     res.render("index", { files });
 });
 
+app.post('/createProject', function (req, res) {
+    var projectname = req.body.name;
+    var category = req.body.category;
+    var tech = req.body.tech;
+    connection.query("INSERT INTO projects (name, category, tech) VALUES (?, ?, ?)", [category.toString(), projectname.toString(), tech.toString()], function (err, result) {
+        if (err) throw err;
+        console.log("1 record inserted");
+    });
+    res.send(loginPage);
+    res.end()
+});
+
 app.post('/auth', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
