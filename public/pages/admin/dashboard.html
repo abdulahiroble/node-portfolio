@@ -1,7 +1,128 @@
 <main class="flex-grow">
   <div class="my-5 text-center text-2xl font-bold">Welcome Admin!</div>
 
-  <form action="/createProject" method="post">
+  <form action="/createProject" method="post" class="w-full max-w-lg mx-auto">
+    <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <label
+          class="
+            block
+            uppercase
+            tracking-wide
+            text-gray-700 text-xs
+            font-bold
+            mb-2
+          "
+          for="grid-first-name"
+        >
+          Project name
+        </label>
+        <input
+          class="
+            appearance-none
+            block
+            w-full
+            bg-gray-200
+            text-gray-700
+            rounded
+            py-3
+            px-4
+            mb-3
+            leading-tight
+            focus:outline-none focus:bg-white
+          "
+          name="name"
+          class=""
+          type="text"
+          placeholder="Weather app"
+        />
+      </div>
+      <div class="w-full md:w-1/2 px-3">
+        <label
+          class="
+            block
+            uppercase
+            tracking-wide
+            text-gray-700 text-xs
+            font-bold
+            mb-2
+          "
+          for="grid-last-name"
+        >
+          Category
+        </label>
+        <input
+          class="
+            appearance-none
+            block
+            w-full
+            bg-gray-200
+            text-gray-700
+            border border-gray-200
+            rounded
+            py-3
+            px-4
+            leading-tight
+            focus:outline-none focus:bg-white focus:border-gray-500
+          "
+          id="grid-last-name"
+          name="category"
+          class=""
+          type="text"
+          placeholder="entertainment"
+        />
+      </div>
+      <div class="w-full md:w-1/2 px-3">
+        <label
+          class="
+            block
+            uppercase
+            tracking-wide
+            text-gray-700 text-xs
+            font-bold
+            mb-2
+          "
+          for="grid-last-name"
+        >
+          Technology
+        </label>
+        <input
+          class="
+            appearance-none
+            block
+            w-full
+            bg-gray-200
+            text-gray-700
+            border border-gray-200
+            rounded
+            py-3
+            px-4
+            leading-tight
+            focus:outline-none focus:bg-white focus:border-gray-500
+          "
+          name="tech"
+          type="text"
+          placeholder="js"
+        />
+      </div>
+    </div>
+    <button
+      class="
+        bg-green-500
+        hover:bg-green-700
+        text-white
+        font-bold
+        py-2
+        px-4
+        rounded
+        focus:outline-none focus:shadow-outline
+      "
+    >
+      Add new project
+    </button>
+  </form>
+
+  <!-- <form action="/createProject" method="post">
     <input name="name" class="" type="text" placeholder="Weather app" />
     <input name="category" class="" type="text" placeholder="entertainment" />
     <input name="tech" class="" type="text" placeholder="js" />
@@ -20,5 +141,5 @@
     >
       Send
     </button>
-  </form>
+  </form> -->
 </main>

@@ -18,7 +18,6 @@ app.use(session({
     secret: 'secret',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
 }));
 
 app.use(express.static("public"));
@@ -71,9 +70,9 @@ app.post('/createProject', function (req, res) {
     var projectname = req.body.name;
     var category = req.body.category;
     var tech = req.body.tech;
-    connection.query("INSERT INTO projects (name, category, tech) VALUES (?, ?, ?)", [category.toString(), projectname.toString(), tech.toString()], function (err, result) {
+    connection.query("INSERT INTO projects (name, category, tech) VALUES (?, ?, ?)", [projectname.toString(), category.toString(), tech.toString()], function (err, result) {
         if (err) throw err;
-        console.log("1 record inserted");
+        console.log("New project added");
     });
     res.send(loginPage);
     res.end()
