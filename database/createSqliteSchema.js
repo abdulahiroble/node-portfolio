@@ -7,10 +7,10 @@ import { createConnection } from "./connectSqlite.js";
 
     const gamesTableSchema = `
         CREATE TABLE projects (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            genre TEXT,
-            price DOUBLE
+            id int(11) NOT NULL,
+            name varchar(50) NOT NULL,
+            category varchar(255) NOT NULL,
+            tech varchar(100) NOT NULL
         )
     `;
 
