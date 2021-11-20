@@ -5,14 +5,6 @@ import contact from "./routers/contact.js"
 import session from "express-session";
 const app = express();
 import sessionRouter from "./routers/session.js";
-import mysql from "mysql"
-
-export var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'node-portfolio'
-});
 
 app.use(session({
     secret: 'secret',
@@ -34,7 +26,7 @@ export const forside = createPage("forside/forside.html", {
 const contactPage = createPage("contact/contact.html");
 const projectsPage = createPage("projects/projects.html");
 const cvPage = createPage("cv/cv.html");
-const loginPage = createPage("login/login.html")
+export const loginPage = createPage("login/login.html")
 export const adminPage = createPage("admin/dashboard.html")
 
 app.get("/", (req, res) => {
@@ -64,59 +56,6 @@ app.get("/admin", (req, res) => {
 
 app.get("/", (req, res) => {
     res.render("index", { files });
-});
-
-app.post('/createProject', function (req, res) {
-    var projectname = req.body.name;
-    var category = req.body.category;
-    var tech = req.body.tech;
-    connection.query("INSERT INTO projects (name, category, tech) VALUES (?, ?, ?)", [projectname.toString(), category.toString(), tech.toString()], function (err, result) {
-        if (err) throw err;
-        console.log("New project added");
-    });
-    res.send(loginPage);
-    res.end()
-});
-
-
-app.post('/auth', function (request, response) {
-    var username = request.body.username;
-    var password = request.body.password;
-    if (username && password) {
-        connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
-            if (results.length > 0) {
-                request.session.loggedin = true;
-                request.session.username = username;
-                response.redirect('/admin');
-            } else {
-                response.send('Incorrect Username and/or Password!');
-            }
-            response.end();
-        });
-    } else {
-        response.send('Please enter Username and Password!');
-        response.end();
-    }
-});
-
-app.get('/projects', function (request, response) {
-    var username = request.body.username;
-    var password = request.body.password;
-    if (username && password) {
-        connection.query('SELECT * FROM projects', function (error, results, fields) {
-            if (results.length > 0) {
-                request.session.loggedin = true;
-                request.session.username = username;
-                response.redirect('/admin');
-            } else {
-                response.send('Incorrect Username and/or Password!');
-            }
-            response.end();
-        });
-    } else {
-        response.send('Please enter Username and Password!');
-        response.end();
-    }
 });
 
 const PORT = process.env.PORT || 3000;
