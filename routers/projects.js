@@ -4,7 +4,6 @@ import { connection } from "../database/connectMysqlDb.js";
 const router = express.Router();
 
 router.get("/projects", async (req, res) => {
-
     await connection.query('SELECT * from projects', function (error, results, fields) {
         if (error) throw error;
         res.send(results)
