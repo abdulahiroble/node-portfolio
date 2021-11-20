@@ -3,14 +3,23 @@ import { loginPage } from "../app.js";
 import { connection } from "../database/connectMysqlDb.js";
 const router = express.Router();
 
-router.get("/projects", async (req, res) => {
-    await connection.query('SELECT * from projects', function (error, results, fields) {
+router.get("/projects", (req, res) => {
+    connection.query('SELECT * from projects', function (error, results, fields) {
         if (error) throw error;
         res.send(results)
     },
 
     )
 });
+
+router.put('/updateProject', function (req, res) {
+    connection.query("UPDATE projects SET name = 'Canyon 123' WHERE id = '1'", function (error, results, fields) {
+        if (error) throw err;
+        res.send("project updated");
+    },
+
+    )
+})
 
 router.post('/auth', function (request, response) {
     var username = request.body.username;
@@ -43,5 +52,6 @@ router.post('/createProject', function (req, res) {
     res.send(loginPage);
     res.end()
 });
+
 
 export default router;
