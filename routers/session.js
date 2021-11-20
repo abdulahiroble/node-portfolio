@@ -45,7 +45,7 @@ const router = express.Router();
 // });
 
 router.get("/admin", (req, res) => {
-    // req.session.isVisiting = true;
+    req.session.admin = true;
     if (req.session.loggedin) {
         res.send(adminPage);
     } else {
@@ -54,8 +54,8 @@ router.get("/admin", (req, res) => {
     res.end();
 });
 
-router.get("/isVisiting", (req, res) => {
-    res.send({ clientIsVisiting: req.session.isVisiting || false });
+router.get("/admin", (req, res) => {
+    res.send({ admin: req.session.admin || false });
 });
 
 router.get("/logout", (req, res) => {

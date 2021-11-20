@@ -7,7 +7,7 @@ const app = express();
 import sessionRouter from "./routers/session.js";
 import mysql from "mysql"
 
-var connection = mysql.createConnection({
+export var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'password',
@@ -78,6 +78,7 @@ app.post('/createProject', function (req, res) {
     res.end()
 });
 
+
 app.post('/auth', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
@@ -98,23 +99,25 @@ app.post('/auth', function (request, response) {
     }
 });
 
-// app.get('/admin', function (request, response) {
-//     if (request.session.loggedin) {
-//         response.send('Welcome back, ' + request.session.username + '!');
-//     } else {
-//         response.send('Please login to view this page!');
-//     }
-//     response.end();
-// });
-
-// app.get("/isVisiting", (req, res) => {
-//     res.send({ clientIsVisiting: req.session.isVisiting || false });
-// });
-
-// app.get("/leave", (req, response) => {
-//     req.session.destroy();
-//     response.send({});
-// });
+app.get('/projects', function (request, response) {
+    var username = request.body.username;
+    var password = request.body.password;
+    if (username && password) {
+        connection.query('SELECT * FROM projects', function (error, results, fields) {
+            if (results.length > 0) {
+                request.session.loggedin = true;
+                request.session.username = username;
+                response.redirect('/admin');
+            } else {
+                response.send('Incorrect Username and/or Password!');
+            }
+            response.end();
+        });
+    } else {
+        response.send('Please enter Username and Password!');
+        response.end();
+    }
+});
 
 const PORT = process.env.PORT || 3000;
 
