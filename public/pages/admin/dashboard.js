@@ -30,7 +30,9 @@
             </div>
 
 
-            <div class="ml-10">
+            <div class="ml-10 flex">
+
+              <div>
                 <button
                 class="
                 bg-blue-500
@@ -44,9 +46,11 @@
                 onclick="updateFunction()">
                     update
                 </button>  
+              </div>
                 
                 
 
+              <div class="ml-5">
                 <form
                 action="/delete/${project.id}"
                 method="get">
@@ -67,6 +71,7 @@
 
 
                 </form>
+              </div>
                 
  
             </div>
