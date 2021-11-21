@@ -12,6 +12,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+// app.use(express.static("routers"));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -54,9 +55,9 @@ app.get("/admin", (req, res) => {
     res.send(adminPage);
 });
 
-app.get("/", (req, res) => {
-    res.render("index", { files });
-});
+// app.get("/", (req, res) => {
+//     res.render("index", { files });
+// });
 
 const PORT = process.env.PORT || 3000;
 

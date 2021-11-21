@@ -12,8 +12,10 @@ router.get("/projects", (req, res) => {
     )
 });
 
-router.delete('/api/deleteProject', function (req, res) {
-    connection.query("DELETE FROM projects WHERE id = '1'", function (error, results, fields) {
+
+router.get('/delete/:id', function (req, res) {
+    const id = req.params.id;
+    connection.query(`DELETE FROM projects WHERE id = ${id}`, function (error, results, fields) {
         if (error) throw err;
         res.send("project deleted");
     },
@@ -21,14 +23,24 @@ router.delete('/api/deleteProject', function (req, res) {
     )
 })
 
-router.put('/updateProject', function (req, res) {
-    connection.query("UPDATE projects SET name = 'Canyon 123' WHERE id = '1'", function (error, results, fields) {
-        if (error) throw err;
-        res.send("project updated");
-    },
+router.post('/update', (req, res) => {
+    const userId = req.body.id;
+    let sql = "update users SET name='" + req.body.name + "',  email='" + req.body.email + "',  phone_no='" + req.body.phone_no + "' where id =" + userId;
+    let query = connection.query(sql, (err, results) => {
+        if (err) throw err;
+        res.redirect('/');
+    });
+});
 
-    )
-})
+
+// router.put('/updateProject', function (req, res) {
+//     connection.query("UPDATE projects SET name = 'Canyon 123' WHERE id = '1'", function (error, results, fields) {
+//         if (error) throw err;
+//         res.send("project updated");
+//     },
+
+//     )
+// })
 
 router.post('/auth', function (request, response) {
     var username = request.body.username;

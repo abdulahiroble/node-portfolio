@@ -1,8 +1,22 @@
+// import express from "express";
+// const router = express.Router();
+// import { connection } from "../../../database/connectMysqlDb.js";
+
 (async () => {
     let response = await fetch("/projects");
     let projects = await response.json();
 
     const projectsWrapperDiv = document.getElementById("projects-wrapper");
+
+    // const test = router.delete('/delete/:id', function (req, res) {
+    //     const id = req.params.id;
+    //     connection.query(`DELETE FROM projects WHERE id = ${id}`, function (error, results, fields) {
+    //         if (error) throw err;
+    //         res.send("project deleted");
+    //     },
+
+    //     )
+    // })
 
     projects.map(project => {
         const projectDiv = document.createElement("div");
@@ -29,8 +43,14 @@
                 "
                 onclick="updateFunction()">
                     update
-                </button>   
+                </button>  
                 
+                
+
+                <form
+                action="/delete/${project.id}"
+                method="get">
+
                 <button
                 class="
                 bg-red-500
@@ -40,10 +60,15 @@
                 py-2
                 px-4
                 rounded
-                "
-                onclick="deleteFunction()">
+                ">
                     delete
-                </button>   
+                </button> 
+
+
+
+                </form>
+                
+ 
             </div>
         
         </div>
