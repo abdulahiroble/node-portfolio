@@ -1,5 +1,5 @@
 import express from "express";
-import { loginPage } from "../app.js";
+import { adminPage, loginPage } from "../app.js";
 import { connection } from "../database/connectMysqlDb.js";
 const router = express.Router();
 
@@ -11,6 +11,15 @@ router.get("/projects", (req, res) => {
 
     )
 });
+
+router.delete('/api/deleteProject', function (req, res) {
+    connection.query("DELETE FROM projects WHERE id = '1'", function (error, results, fields) {
+        if (error) throw err;
+        res.send("project deleted");
+    },
+
+    )
+})
 
 router.put('/updateProject', function (req, res) {
     connection.query("UPDATE projects SET name = 'Canyon 123' WHERE id = '1'", function (error, results, fields) {
@@ -49,7 +58,7 @@ router.post('/createProject', function (req, res) {
         if (err) throw err;
         console.log("New project added");
     });
-    res.send(loginPage);
+    res.send(adminPage);
     res.end()
 });
 

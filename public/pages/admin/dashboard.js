@@ -7,10 +7,46 @@
     projects.map(project => {
         const projectDiv = document.createElement("div");
         projectDiv.innerHTML = `
-        <h3>Project name: ${escapeHTML(project.name)}</h3>
-        <p>Category: ${escapeHTML(project.category)}</p>
-        <p>Technology: ${escapeHTML(project.tech)}</p>
-        <p>Id: ${project.id}</p>
+        <div class="flex justify-between">
+
+            <div>
+                <div class="text-lg">Project name: ${escapeHTML(project.name)}</div>
+                <div class="text-lg my-3">Category: ${escapeHTML(project.category)}</div>
+                <div class="text-lg">Technology: ${escapeHTML(project.tech)}</div>
+            </div>
+
+
+            <div class="ml-10">
+                <button
+                class="
+                bg-blue-500
+                hover:bg-blue-700
+                text-white
+                font-bold
+                py-2
+                px-4
+                rounded
+                "
+                onclick="updateFunction()">
+                    update
+                </button>   
+                
+                <button
+                class="
+                bg-red-500
+                hover:bg-red-700
+                text-white
+                font-bold
+                py-2
+                px-4
+                rounded
+                "
+                onclick="deleteFunction()">
+                    delete
+                </button>   
+            </div>
+        
+        </div>
 
         <br/><br/>
     `;
