@@ -29,10 +29,17 @@ router.get('/edit/:projectId', (req, res) => {
     let query = connection.query(sql, (err, result) => {
         if (err) throw err;
         res.send(result)
-        // res.redirect(`/edit/${result.id}`)
-        // res.render('user_edit', {
-        //     user: result[0]
-        // });
+
+    });
+});
+
+router.get('/editProject/:projectId', (req, res) => {
+    const projectId = req.params.projectId;
+    let sql = `Select * from projects where id = ${projectId}`;
+    let query = connection.query(sql, (err, result) => {
+        if (err) throw err;
+        res.redirect("/editProject")
+
     });
 });
 

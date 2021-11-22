@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
     res.send(forside);
 });
 
-app.get("/edit", (req, res) => {
+app.get("/editProject", (req, res) => {
     res.send(editPage);
 });
 
