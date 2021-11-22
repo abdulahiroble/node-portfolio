@@ -17,18 +17,32 @@ router.get('/delete/:id', function (req, res) {
     const id = req.params.id;
     connection.query(`DELETE FROM projects WHERE id = ${id}`, function (error, results, fields) {
         if (error) throw err;
-        res.send("project deleted");
+        res.redirect("/admin");
     },
 
     )
 })
 
-router.post('/update', (req, res) => {
-    const userId = req.body.id;
-    let sql = "update users SET name='" + req.body.name + "',  email='" + req.body.email + "',  phone_no='" + req.body.phone_no + "' where id =" + userId;
-    let query = connection.query(sql, (err, results) => {
+router.get('/edit/:projectId', (req, res) => {
+    const projectId = req.params.projectId;
+    let sql = `Select * from projects where id = ${projectId}`;
+    let query = connection.query(sql, (err, result) => {
         if (err) throw err;
-        res.redirect('/');
+        res.send(result)
+        // res.redirect(`/edit/${result.id}`)
+        // res.render('user_edit', {
+        //     user: result[0]
+        // });
+    });
+});
+
+router.post('/update', (req, res) => {
+    const projectId = req.body.id;
+    let sql = "update projects SET name='" + req.body.name + "',  category='" + req.body.category + "',  tech='" + req.body.tech + "' where id =" + projectId;
+    connection.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log("Project updated");
+        res.redirect("/admin");
     });
 });
 
@@ -70,7 +84,7 @@ router.post('/createProject', function (req, res) {
         if (err) throw err;
         console.log("New project added");
     });
-    res.send(adminPage);
+    res.redirect("/admin");
     res.end()
 });
 

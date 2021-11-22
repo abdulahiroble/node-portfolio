@@ -29,9 +29,14 @@ const projectsPage = createPage("projects/projects.html");
 const cvPage = createPage("cv/cv.html");
 export const loginPage = createPage("login/login.html")
 export const adminPage = createPage("admin/dashboard.html")
+const editPage = createPage("admin/editProject.html")
 
 app.get("/", (req, res) => {
     res.send(forside);
+});
+
+app.get("/edit", (req, res) => {
+    res.send(editPage);
 });
 
 app.get("/projects", (req, res) => {
