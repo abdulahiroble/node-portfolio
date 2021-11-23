@@ -8,11 +8,12 @@
         const projectDiv = document.createElement("div");
         projectDiv.innerHTML = `
 
-        <div class="flex justify-between">
+        <div class="flex justify-between text-xl font-bold">
             <div>
-                Project name: ${escapeHTML(project.name)}
-                <p>Category: ${escapeHTML(project.category)}</p>
-                <p>Technology: ${escapeHTML(project.tech)}</p>
+                <div>Project name: ${escapeHTML(project.name)}</div>
+                <div>Category: ${escapeHTML(project.category)}</div>
+                <div>Technology: ${escapeHTML(project.tech)}</div>
+                <div>Url: <a class="text-blue-800" target="_blank" href="${project.url}">${project.name}</a></div>
             </div>
         
         </div>

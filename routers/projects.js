@@ -11,7 +11,6 @@ router.get("/projects", (req, res) => {
     )
 });
 
-
 router.get('/delete/:id', function (req, res) {
     const id = req.params.id;
     connection.query(`DELETE FROM projects WHERE id = ${id}`, function (error, results, fields) {
@@ -21,26 +20,6 @@ router.get('/delete/:id', function (req, res) {
 
     )
 })
-
-// router.get('/edit/:projectId', (req, res) => {
-//     const projectId = req.params.projectId;
-//     let sql = `Select * from projects where id = ${projectId}`;
-//     let query = connection.query(sql, (err, result) => {
-//         if (err) throw err;
-//         res.send(result)
-
-//     });
-// });
-
-// router.get('/editProject/:projectId', (req, res) => {
-//     const projectId = req.params.projectId;
-//     let sql = `Select * from projects where id = ${projectId}`;
-//     let query = connection.query(sql, (err, result) => {
-//         if (err) throw err;
-//         res.redirect("/editProject")
-
-//     });
-// });
 
 router.post('/update', (req, res) => {
     const projectId = req.body.id;
@@ -52,15 +31,6 @@ router.post('/update', (req, res) => {
     });
 });
 
-
-// router.put('/updateProject', function (req, res) {
-//     connection.query("UPDATE projects SET name = 'Canyon 123' WHERE id = '1'", function (error, results, fields) {
-//         if (error) throw err;
-//         res.send("project updated");
-//     },
-
-//     )
-// })
 
 router.post('/auth', function (request, response) {
     var username = request.body.username;
@@ -86,7 +56,8 @@ router.post('/createProject', function (req, res) {
     var projectname = req.body.name;
     var category = req.body.category;
     var tech = req.body.tech;
-    connection.query("INSERT INTO projects (name, category, tech) VALUES (?, ?, ?)", [projectname.toString(), category.toString(), tech.toString()], function (err, result) {
+    var url = req.body.url;
+    connection.query("INSERT INTO projects (name, category, tech, url) VALUES (?, ?, ?, ?)", [projectname.toString(), category.toString(), tech.toString(), url.toString()], function (err, result) {
         if (err) throw err;
         console.log("New project added");
     });
