@@ -10,12 +10,12 @@ router.post("/api/contact", (req, res) => {
     async function main() {
 
         let transporter = nodemailer.createTransport({
-            host: 'smtp-mail.outlook.com',                  // hostname
-            service: 'outlook',                             // service name
+            host: 'smtp-mail.outlook.com',
+            service: 'outlook',
             secureConnection: false,
             auth: {
-                user: process.env.OUTLOOK_EMAIL, // generated ethereal user
-                pass: process.env.OUTLOOK_PASSWORD, // generated ethereal password
+                user: process.env.OUTLOOK_EMAIL,
+                pass: process.env.OUTLOOK_PASSWORD,
             },
             tls: {
                 ciphers: "SSLv3",
@@ -23,13 +23,12 @@ router.post("/api/contact", (req, res) => {
             },
         });
 
-        // send mail with defined transport object
         let info = await transporter.sendMail({
-            from: '"abdulahi 👻" <abdulahi_2610@hotmail.com>', // sender address
-            to: `${req.body.email}`, // list of receivers
-            subject: "Hello ✔", // Subject line
-            text: `${req.body.message}`, // plain text body
-            html: `${req.body.message}`, // html body
+            from: '"abdulahi 👻" <abdulahi_2610@hotmail.com>',
+            to: `${req.body.email}`,
+            subject: "Hello ✔",
+            text: `${req.body.message}`,
+            html: `${req.body.message}`,
         });
 
         console.log("Message sent: %s", info.messageId);

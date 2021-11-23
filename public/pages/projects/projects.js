@@ -7,10 +7,16 @@
     projects.map(project => {
         const projectDiv = document.createElement("div");
         projectDiv.innerHTML = `
-        <h3>Project name: ${escapeHTML(project.name)}</h3>
-        <p>Category: ${escapeHTML(project.category)}</p>
-        <p>Technology: ${escapeHTML(project.tech)}</p>
-        <p>Id: ${escapeHTML(project.id)}</p>
+
+        <div class="flex justify-between text-xl font-bold">
+            <div>
+                <div>Project name: ${escapeHTML(project.name)}</div>
+                <div>Category: ${escapeHTML(project.category)}</div>
+                <div>Technology: ${escapeHTML(project.tech)}</div>
+                <div>Url: <a class="text-blue-800" target="_blank" href="${project.url}">${project.name}</a></div>
+            </div>
+        
+        </div>
 
         <br/><br/>
     `;
