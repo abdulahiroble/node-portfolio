@@ -1,5 +1,4 @@
 import express from "express";
-import { adminPage, loginPage } from "../app.js";
 import { connection } from "../database/connectMysqlDb.js";
 const router = express.Router();
 
@@ -23,25 +22,25 @@ router.get('/delete/:id', function (req, res) {
     )
 })
 
-router.get('/edit/:projectId', (req, res) => {
-    const projectId = req.params.projectId;
-    let sql = `Select * from projects where id = ${projectId}`;
-    let query = connection.query(sql, (err, result) => {
-        if (err) throw err;
-        res.send(result)
+// router.get('/edit/:projectId', (req, res) => {
+//     const projectId = req.params.projectId;
+//     let sql = `Select * from projects where id = ${projectId}`;
+//     let query = connection.query(sql, (err, result) => {
+//         if (err) throw err;
+//         res.send(result)
 
-    });
-});
+//     });
+// });
 
-router.get('/editProject/:projectId', (req, res) => {
-    const projectId = req.params.projectId;
-    let sql = `Select * from projects where id = ${projectId}`;
-    let query = connection.query(sql, (err, result) => {
-        if (err) throw err;
-        res.redirect("/editProject")
+// router.get('/editProject/:projectId', (req, res) => {
+//     const projectId = req.params.projectId;
+//     let sql = `Select * from projects where id = ${projectId}`;
+//     let query = connection.query(sql, (err, result) => {
+//         if (err) throw err;
+//         res.redirect("/editProject")
 
-    });
-});
+//     });
+// });
 
 router.post('/update', (req, res) => {
     const projectId = req.body.id;
