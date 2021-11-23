@@ -1,5 +1,5 @@
 import express from "express";
-import { loginPage } from "../app.js";
+import { adminPage, loginPage } from "../app.js";
 import { connection } from "../database/connectMysqlDb.js";
 const router = express.Router();
 
@@ -12,14 +12,56 @@ router.get("/projects", (req, res) => {
     )
 });
 
-router.put('/updateProject', function (req, res) {
-    connection.query("UPDATE projects SET name = 'Canyon 123' WHERE id = '1'", function (error, results, fields) {
+
+router.get('/delete/:id', function (req, res) {
+    const id = req.params.id;
+    connection.query(`DELETE FROM projects WHERE id = ${id}`, function (error, results, fields) {
         if (error) throw err;
-        res.send("project updated");
+        res.redirect("/admin");
     },
 
     )
 })
+
+router.get('/edit/:projectId', (req, res) => {
+    const projectId = req.params.projectId;
+    let sql = `Select * from projects where id = ${projectId}`;
+    let query = connection.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result)
+
+    });
+});
+
+router.get('/editProject/:projectId', (req, res) => {
+    const projectId = req.params.projectId;
+    let sql = `Select * from projects where id = ${projectId}`;
+    let query = connection.query(sql, (err, result) => {
+        if (err) throw err;
+        res.redirect("/editProject")
+
+    });
+});
+
+router.post('/update', (req, res) => {
+    const projectId = req.body.id;
+    let sql = "update projects SET name='" + req.body.name + "',  category='" + req.body.category + "',  tech='" + req.body.tech + "' where id =" + projectId;
+    connection.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log("Project updated");
+        res.redirect("/admin");
+    });
+});
+
+
+// router.put('/updateProject', function (req, res) {
+//     connection.query("UPDATE projects SET name = 'Canyon 123' WHERE id = '1'", function (error, results, fields) {
+//         if (error) throw err;
+//         res.send("project updated");
+//     },
+
+//     )
+// })
 
 router.post('/auth', function (request, response) {
     var username = request.body.username;
@@ -49,7 +91,7 @@ router.post('/createProject', function (req, res) {
         if (err) throw err;
         console.log("New project added");
     });
-    res.send(loginPage);
+    res.redirect("/admin");
     res.end()
 });
 

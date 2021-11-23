@@ -12,6 +12,7 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+// app.use(express.static("routers"));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,9 +29,14 @@ const projectsPage = createPage("projects/projects.html");
 const cvPage = createPage("cv/cv.html");
 export const loginPage = createPage("login/login.html")
 export const adminPage = createPage("admin/dashboard.html")
+const editPage = createPage("admin/editProject.html")
 
 app.get("/", (req, res) => {
     res.send(forside);
+});
+
+app.get("/editProject", (req, res) => {
+    res.send(editPage);
 });
 
 app.get("/projects", (req, res) => {
@@ -54,9 +60,9 @@ app.get("/admin", (req, res) => {
     res.send(adminPage);
 });
 
-app.get("/", (req, res) => {
-    res.render("index", { files });
-});
+// app.get("/", (req, res) => {
+//     res.render("index", { files });
+// });
 
 const PORT = process.env.PORT || 3000;
 
